@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Revolt | OTWT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1693/1693746.png" alt="Logo" class="company-logo">
+            <div class="logo-text">OTWT<span class="accent">.</span>STUDIOS</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+            <li>
+                <a href="#" data-i18n="nav_games">Games</a>
+                <div class="dropdown-content">
+                    <a href="cyber-revolt.html">CYBER REVOLT</a>
+                    <a href="into-the-void.html">INTO THE VOID</a>
+                    <a href="neon-drifter.html">NEON DRIFTER</a>
+                </div>
+            </li>
+            <li><a href="about.html" data-i18n="nav_about">About</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="settings-container">
+                <i class="fa-solid fa-gear settings-icon" id="settingsBtn"></i>
+                <div class="settings-popup" id="settingsPopup">
+                    <h4 data-i18n="settings_title">SETTINGS</h4>
+                    <div class="setting-item">
+                        <label data-i18n="lbl_lang">Language</label>
+                        <select id="lang-select"><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option></select>
+                    </div>
+                    <div class="setting-row">
+                        <span data-i18n="lbl_anim">Animations</span>
+                        <input type="checkbox" id="anim-check">
+                    </div>
+                    <button class="clear-btn" id="clearCookies" data-i18n="btn_clear">Clear Cookies</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="game-header">
+        <div class="game-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop');"></div>
+        <div class="game-title-wrapper">
+            <h1>CYBER REVOLT</h1>
+            <span class="genre-tag" data-i18n="hero_rpg">RPG / ACTION</span>
+        </div>
+    </header>
+
+    <section class="game-info container">
+        <div class="game-description">
+            <h3>HACK THE SYSTEM</h3>
+            <p data-i18n="game_desc_cyber">In the year 2099, corporations rule the skyline...</p>
+            <button class="cyber-btn" data-i18n="btn_buy">BUY NOW</button>
+        </div>
+        <div class="game-media">
+            <div class="media-placeholder">GAMEPLAY CLIP</div>
+        </div>
+    </section>
+    
+    <footer><div class="footer-content"><p data-i18n="footer_rights">© 2025 OTWT Studios. All Rights Reserved.</p></div></footer>
+    <script src="script.js"></script>
+</body>
+</html>

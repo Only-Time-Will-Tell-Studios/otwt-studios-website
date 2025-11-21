@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | OTWT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Nav (Copy of Index Nav) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1693/1693746.png" alt="Logo" class="company-logo">
+            <div class="logo-text">Only Time Will Tell<span class="accent">.</span>Studios</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+            <li>
+                <a href="#" data-i18n="nav_games">Games</a>
+                <div class="dropdown-content">
+                    <a href="cyber-revolt.html">CYBER REVOLT</a>
+                    <a href="into-the-void.html">INTO THE VOID</a>
+                    <a href="neon-drifter.html">NEON DRIFTER</a>
+                </div>
+            </li>
+            <li><a href="about.html" class="active" data-i18n="nav_about">About</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="settings-container">
+                <i class="fa-solid fa-gear settings-icon" id="settingsBtn"></i>
+                <div class="settings-popup" id="settingsPopup">
+                    <h4 data-i18n="settings_title">SETTINGS</h4>
+                    <div class="setting-item">
+                        <label data-i18n="lbl_lang">Language</label>
+                        <select id="lang-select"><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option></select>
+                    </div>
+                    <div class="setting-row">
+                        <span data-i18n="lbl_anim">Animations</span>
+                        <input type="checkbox" id="anim-check">
+                    </div>
+                    <button class="clear-btn" id="clearCookies" data-i18n="btn_clear">Clear Cookies</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 data-i18n="about_mission">OUR MISSION</h1>
+    </header>
+
+    <section class="container section-pad">
+        <div class="text-box full-width">
+            <h2 data-i18n="about_forge">FORGING THE FUTURE</h2>
+            <p data-i18n="about_desc">OTWT Studios started in a garage in 2015...</p>
+        </div>
+    </section>
+
+    <section class="container section-pad">
+        <h2 class="section-title" data-i18n="team_squad">THE SQUAD</h2>
+        <div class="team-grid">
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop" alt="CEO">
+                <div class="member-info">
+                    <h3>ALEX VANCE</h3>
+                    <p data-i18n="role_cd">Creative Director</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop" alt="CTO">
+                <div class="member-info">
+                    <h3>SARAH LIN</h3>
+                    <p data-i18n="role_le">Lead Engineer</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000&auto=format&fit=crop" alt="Art">
+                <div class="member-info">
+                    <h3>MARCUS KANE</h3>
+                    <p data-i18n="role_ad">Art Director</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop" alt="Dev">
+                <div class="member-info">
+                    <h3>ELENA ROJAS</h3>
+                    <p data-i18n="role_sd">Senior Developer</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop" alt="Sound">
+                <div class="member-info">
+                    <h3>DAVID CHEN</h3>
+                    <p data-i18n="role_ae">Audio Engineer</p>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?q=80&w=1000&auto=format&fit=crop" alt="Writer">
+                <div class="member-info">
+                    <h3>JESSICA VOIGHT</h3>
+                    <p data-i18n="role_nl">Narrative Lead</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer><div class="footer-content"><p data-i18n="footer_rights">© 2025 OTWT Studios. All Rights Reserved.</p></div></footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | OTWT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <img src="https://cdn-icons-png.flaticon.com/512/1693/1693746.png" alt="Logo" class="company-logo">
+            <div class="logo-text">OTWT<span class="accent">.</span>STUDIOS</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+            <li>
+                <a href="#" data-i18n="nav_games">Games</a>
+                <div class="dropdown-content">
+                    <a href="cyber-revolt.html">CYBER REVOLT</a>
+                    <a href="into-the-void.html">INTO THE VOID</a>
+                    <a href="neon-drifter.html">NEON DRIFTER</a>
+                </div>
+            </li>
+            <li><a href="about.html" data-i18n="nav_about">About</a></li>
+            <li><a href="contact.html" class="active" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="settings-container">
+                <i class="fa-solid fa-gear settings-icon" id="settingsBtn"></i>
+                <div class="settings-popup" id="settingsPopup">
+                    <h4 data-i18n="settings_title">SETTINGS</h4>
+                    <div class="setting-item">
+                        <label data-i18n="lbl_lang">Language</label>
+                        <select id="lang-select"><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option></select>
+                    </div>
+                    <div class="setting-row">
+                        <span data-i18n="lbl_anim">Animations</span>
+                        <input type="checkbox" id="anim-check">
+                    </div>
+                    <button class="clear-btn" id="clearCookies" data-i18n="btn_clear">Clear Cookies</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 data-i18n="contact_title">CONTACT US</h1>
+    </header>
+
+    <section class="container section-pad">
+        <div class="contact-wrapper">
+            <!-- Direct Contact -->
+            <div class="text-box">
+                <h2 data-i18n="footer_touch">GET IN TOUCH</h2>
+                <p>Email: support@OTWTstudios.com</p>
+                <p>Business: press@OTWTstudios.com</p>
+                <div class="socials" style="margin-top: 2rem;">
+                    <a href="#"><i class="fa-brands fa-twitter"></i> TWITTER</a>
+                    <a href="#"><i class="fa-brands fa-discord"></i> DISCORD</a>
+                    <a href="#"><i class="fa-brands fa-steam"></i> STEAM</a>
+                </div>
+            </div>
+
+            <!-- Subscription Form -->
+            <div class="stat-box" style="text-align: left; clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);">
+                <h3 style="margin-bottom: 1rem;" data-i18n="contact_sub">JOIN THE MAILING LIST</h3>
+                <form class="contact-form">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your email address...">
+                    </div>
+                    <button type="button" class="cyber-btn" data-i18n="btn_sub">SUBSCRIBE</button>
+                </form>
+                <p class="privacy-text" data-i18n="contact_privacy">We promise not to sell your personal data. We hate spam too.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer><div class="footer-content"><p data-i18n="footer_rights">© 2025 OTWT Studios. All Rights Reserved.</p></div></footer>
+    <script src="script.js"></script>
+</body>
+</html>
