@@ -144,7 +144,7 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) {
     background-size: cover; background-position: center; background-repeat: no-repeat;
 }
 
-.game-panel:hover { flex: 2.5; filter: brightness(1.1); }
+.game-panel:hover { flex: 2.5;; filter: brightness(1.1); }
 .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0.8) brightness(0.6); }
 
 .panel-content {
@@ -155,7 +155,7 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) {
 
 /* Logo Styles for Hero */
 .game-logo {
-    max-width: 500px; /* Adjust size */
+    max-width: 300px; /* Adjust size */
     width: 80%;
     height: auto;
     opacity: 0;
@@ -163,6 +163,8 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) {
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.6));
 }
+
+#panel-2 .game-logo { max-width: 500px; }
 
 /* When hovering panel, show logo */
 .game-panel:hover .game-logo {
