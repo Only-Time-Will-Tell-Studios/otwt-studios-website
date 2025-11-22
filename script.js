@@ -114,9 +114,6 @@ function populateStaticContent() {
     const copyright = document.querySelector('.copyright');
     if(copyright) {
         copyright.innerText = `© ${siteData.company.copyright_year} ${siteData.company.name}.`;
-        // Preserve the translation attribute if needed, but setting text for year
-        // We can assume copyright text is handled by translation, but specific Year/Name comes from JSON
-        // For now, let's leave copyright to the Translation engine entirely
     }
 
     // 7. Socials Links (Footer and Contact)
