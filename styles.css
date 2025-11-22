@@ -15,9 +15,29 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
 /* --- UTILITY: NO ANIMATIONS --- */
+/* Utility class used to disable non-essential motion (set by user preference) */
 body.no-anim *, body.no-anim *::before, body.no-anim *::after {
     transition: none !important;
     animation: none !important;
+}
+
+/* Exceptions: keep interactive hover transitions and final visual state for hero panels.
+   When animations are turned off we still want the panels visible and responding to hover.
+   These rules re-enable only the interactive transitions we want to preserve. */
+body.no-anim .game-panel {
+    animation: none !important; /* stop entrance keyframes */
+    transform: none !important; /* ensure panels sit in final position */
+    opacity: 1 !important; /* make sure they are visible */
+    /* re-enable the interactive flex transition and filter so hover still works */
+    transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important, filter 0.3s ease !important;
+}
+body.no-anim .panel-content {
+    /* allow panel content reveal on hover but keep its initial hidden state */
+    transition: all 0.4s ease !important;
+}
+body.no-anim .hero-container:hover .game-panel:not(:hover) {
+    /* keep the dimming effect on non-hovered panels */
+    filter: grayscale(0.8) brightness(0.6) !important;
 }
 
 /* --- NAVIGATION --- */
@@ -54,7 +74,7 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
     border: 1px solid var(--accent); border-top: none;
     box-shadow: 0 10px 20px rgba(0,0,0,0.8); z-index: 1001;
 }
-.nav-links li:hover .dropdown-content { display: block; animation: fadeIn 0.2s ease; }
+.nav-links li:hover .dropdown-content { display: block; animation: fadeInDropdown 0.2s ease; }
 .dropdown-content a {
     display: block; padding: 1rem; border-bottom: 1px solid #333;
     text-align: center; font-size: 0.85rem;
@@ -81,7 +101,36 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
 .clear-btn { width: 100%; background: #333; color: #fff; border: none; padding: 0.5rem; margin-top: 0.5rem; cursor: pointer; font-family: var(--font-body); text-transform: uppercase; transition: background 0.2s; }
 .clear-btn:hover { background: #c00; }
 
+/* Toggle capsule for animations using label + span for reliable pseudo-element styling */
+.toggle { display: inline-block; vertical-align: middle; position: relative; }
+.toggle input { /* keep input accessible but visually hidden and confined to the label */
+    position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; z-index: 2; cursor: pointer;
+}
+.toggle-track {
+    display: inline-block; width: 52px; height: 28px; background: #151515; border-radius: 999px; position: relative;
+    transition: background 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-sizing: border-box;
+}
+.toggle-track::before {
+    content: '';
+    position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; background: #ffffff; border-radius: 50%;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.36);
+}
+
+.toggle input:checked + .toggle-track { background: var(--accent); }
+.toggle input:checked + .toggle-track::before { transform: translateX(24px); }
+.toggle input:focus + .toggle-track { box-shadow: 0 0 0 6px rgba(0,243,255,0.06); }
+
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Dropdown needs to preserve its horizontal centering (translateX(-50%)).
+   fadeInDropdown animates both translateX and translateY so the dropdown
+   doesn't jump to the right while the animation is running. */
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
 
 /* --- HERO ACCORDION --- */
 /* Fix for scroll bug: Strict Height and Hidden Overflow */
@@ -107,7 +156,7 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
 
 .game-panel:hover { flex: 2.5; filter: brightness(1.1); }
 .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0.8) brightness(0.6); }
-.panel-content { z-index: 2; transform: translateY(20px); opacity: 0; transition: all 0.4s ease; }
+.panel-content { z-index: 2; transform: translateY(0px); opacity: 0; transition: all 0.4s ease; }
 .game-panel:hover .panel-content { transform: translateY(0); opacity: 1; }
 .panel-content h2 {
     font-family: var(--font-head); font-size: 2.5rem; text-shadow: 0 0 10px rgba(0,0,0,0.8); margin-bottom: 0.5rem;
