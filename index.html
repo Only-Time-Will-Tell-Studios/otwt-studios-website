@@ -20,7 +20,7 @@
         <ul class="nav-links">
             <li><a href="index.html" class="active" data-i18n="nav_home">Home</a></li>
             <li>
-                <a href="#" data-i18n="nav_games">Games</a>
+                <span href="#" data-i18n="nav_games">Games</span>
                 <div class="dropdown-content">
                     <!-- Links populated by JS from JSON -->
                 </div>
@@ -61,26 +61,15 @@
         <!-- Game 1 -->
         <a href="cyber-revolt.html" class="game-panel" id="panel-1">
             <div class="panel-content">
-                <!-- 
-                OLD TEXT (Commented Out per request):
-                <h2>CYBER REVOLT</h2>
-                <p data-i18n="hero_rpg">RPG / Action</p>
-                -->
-                <!-- NEW LOGO -->
                 <img src="" class="game-logo" alt="Cyber Revolt">
             </div>
             <div class="overlay"></div>
         </a>
 
         <!-- Game 2 -->
-        <a href="into-the-void.html" class="game-panel" id="panel-2">
+        <a href="underfjord.html" class="game-panel" id="panel-2">
             <div class="panel-content">
-                <!-- 
-                OLD TEXT:
-                <h2>INTO THE VOID</h2>
-                <p data-i18n="hero_horror">Horror / Survival</p>
-                -->
-                <img src="" class="game-logo" alt="Into The Void">
+                <img src="" class="game-logo" alt="Underfjord">
             </div>
             <div class="overlay"></div>
         </a>
@@ -88,11 +77,6 @@
         <!-- Game 3 -->
         <a href="neon-drifter.html" class="game-panel" id="panel-3">
             <div class="panel-content">
-                <!-- 
-                OLD TEXT:
-                <h2>NEON DRIFTER</h2>
-                <p data-i18n="hero_racing">Racing / Arcade</p>
-                -->
                 <img src="" class="game-logo" alt="Neon Drifter">
             </div>
             <div class="overlay"></div>
@@ -122,13 +106,17 @@
     <footer id="contact">
         <div class="footer-content">
             <h3 data-i18n="footer_touch">GET IN TOUCH</h3>
-            <p>press@otwtstudios.com</p>
+            <p class="email">press@otwtstudios.com</p>
             <div class="socials">
-                <a href="#">TWITTER</a>
-                <a href="#">DISCORD</a>
-                <a href="#">STEAM</a>
+                <a class="youtube_link" href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a>
+                <a class="instagram_link" href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
+                <a class="discord_link" href="#"><i class="fa-brands fa-discord"></i> DISCORD</a>
+                <a class="steam link" href="#"><i class="fa-brands fa-steam"></i> STEAM</a>
             </div>
-            <p class="copyright" data-i18n="footer_rights">© 2025 OTWT Studios. All Rights Reserved.</p>
+            <p>
+                <span class="copyright">© 2025 OTWT Studios.</span>
+                <span class="copyright" data-i18n="footer_rights">="footer_rights" All Rights Reserved.</span>
+            </p>
         </div>
     </footer>
 

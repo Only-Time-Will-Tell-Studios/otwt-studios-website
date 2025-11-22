@@ -1,0 +1,14 @@
+TO ADD A NEW GAME:
+
+For the homepage hero, add another <a class="game-panel"><a>.
+Then, add the game's entry into data.json
+Then, make a game.html file for it, link it to the data.json and hero accordion
+
+
+
+TO ADD SUPPORT FOR A NEW LANGUAGE:
+
+In every .html page, add the new language's entry into the nav.settings.lang-select <option> list. 
+Use the language's ISO 639-1 two-character ID as the <option>'s value. (ex. en, fr, de, jp, etc.)
+Then, add that language and all of its translations into data.json. Ensure you use the same
+2 character ID and all the same content keys as the other translations.

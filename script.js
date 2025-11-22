@@ -103,18 +103,41 @@ function populateStaticContent() {
         });
     }
 
-    // 5. Footer
-    const footerEmail = document.querySelector('footer p:nth-of-type(1)'); // Simple selector
+    // 5. Contact Page Email
+    const contactEmail = document.querySelector('div.contact-wrapper p.email');
+    if(contactEmail) contactEmail.innerText = `${siteData.company.email_press}`;
+
+    // 6. Footer
+    const footerEmail = document.querySelector('footer p.email'); // Simple selector
     if(footerEmail) footerEmail.innerText = siteData.company.email_press;
     
     const copyright = document.querySelector('.copyright');
     if(copyright) {
+        copyright.innerText = `© ${siteData.company.copyright_year} ${siteData.company.name}.`;
         // Preserve the translation attribute if needed, but setting text for year
         // We can assume copyright text is handled by translation, but specific Year/Name comes from JSON
         // For now, let's leave copyright to the Translation engine entirely
     }
+
+    // 7. Socials Links (Footer and Contact)
+    const discordLinks = document.querySelectorAll('a.discord_link');
+    discordLinks.forEach(link => {
+        link.href = siteData.links.socials.discord;
+    });
+    const steamLinks = document.querySelectorAll('a.steam.link');
+    steamLinks.forEach(link => {
+        link.href = siteData.links.socials.steam;
+    });
+    const youtubeLinks = document.querySelectorAll('a.youtube_link');
+    youtubeLinks.forEach(link => {
+        link.href = siteData.links.socials.youtube;
+    });
+    const instagramLinks = document.querySelectorAll('a.instagram_link');
+    instagramLinks.forEach(link => {
+        link.href = siteData.links.socials.instagram;
+    });
     
-    // 6. Game Page Specifics (If on a game page)
+    // 8. Game Page Specifics (If on a game page)
     const heroBg = document.querySelector('.game-hero-bg');
     if (heroBg) {
         // Find which game this is based on URL or specific ID on body/element
