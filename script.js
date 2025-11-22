@@ -1,123 +1,5 @@
-// --- TRANSLATIONS DICTIONARY ---
-const translations = {
-    'en': {
-        'nav_home': 'Home',
-        'nav_games': 'Games',
-        'nav_about': 'About',
-        'nav_contact': 'Contact',
-        'hero_rpg': 'RPG / Action',
-        'hero_horror': 'Horror / Survival',
-        'hero_racing': 'Racing / Arcade',
-        'home_title': 'WE BUILD WORLDS',
-        'home_desc': 'OTWT Studios is dedicated to pushing the boundaries of interactive entertainment. We combine bleeding-edge graphics with deep, narrative-driven gameplay.',
-        'btn_team': 'Meet The Team',
-        'stats_awards': 'Awards Won',
-        'stats_players': 'Players',
-        'footer_touch': 'GET IN TOUCH',
-        'footer_rights': '© 2025 OTWT Studios. All Rights Reserved.',
-        'about_mission': 'OUR MISSION',
-        'about_forge': 'FORGING THE FUTURE',
-        'about_desc': 'OTWT Studios started in a garage in 2015 with a simple dream: to create games that don\'t just entertain, but transport players to entirely new dimensions.',
-        'team_squad': 'THE SQUAD',
-        'role_cd': 'Creative Director',
-        'role_le': 'Lead Engineer',
-        'role_ad': 'Art Director',
-        'role_sd': 'Senior Developer',
-        'role_ae': 'Audio Engineer',
-        'role_nl': 'Narrative Lead',
-        'game_desc_cyber': 'In the year 2099, corporations rule the skyline. Join the resistance in this open-world RPG where hacking is your weapon and stealth is your shield.',
-        'game_desc_void': 'Stranded on a derelict station, you must survive entities that track you by sound. A terrifying VR-compatible experience.',
-        'game_desc_neon': 'High-speed synthwave racing through procedurally generated cities. Compete online for the top of the leaderboard.',
-        'btn_buy': 'BUY NOW',
-        'header_games': 'Games',
-        'contact_title': 'CONTACT US',
-        'contact_sub': 'JOIN THE MAILING LIST',
-        'contact_privacy': 'We promise not to sell your personal data. We hate spam too.',
-        'btn_sub': 'SUBSCRIBE',
-        'settings_title': 'SETTINGS',
-        'lbl_lang': 'Language',
-        'lbl_anim': 'Animations',
-        'btn_clear': 'Clear Cookies'
-    },
-    'fr': {
-        'nav_home': 'Accueil',
-        'nav_games': 'Jeux',
-        'nav_about': 'À propos',
-        'nav_contact': 'Contact',
-        'hero_rpg': 'Jeu de Rôle / Action',
-        'hero_horror': 'Horreur / Survie',
-        'hero_racing': 'Course / Arcade',
-        'home_title': 'NOUS CRÉONS DES MONDES',
-        'home_desc': 'OTWT Studios repousse les limites du divertissement interactif. Nous combinons des graphismes de pointe avec un gameplay narratif profond.',
-        'btn_team': 'Rencontrer l\'équipe',
-        'stats_awards': 'Prix Remportés',
-        'stats_players': 'Joueurs',
-        'footer_touch': 'CONTACTEZ-NOUS',
-        'footer_rights': '© 2025 OTWT Studios. Tous droits réservés.',
-        'about_mission': 'NOTRE MISSION',
-        'about_forge': 'FORGER L\'AVENIR',
-        'about_desc': 'OTWT Studios a débuté dans un garage en 2015 avec un rêve simple : créer des jeux qui transportent les joueurs vers de nouvelles dimensions.',
-        'team_squad': 'L\'ÉQUIPE',
-        'role_cd': 'Directeur Créatif',
-        'role_le': 'Ingénieur Principal',
-        'role_ad': 'Directeur Artistique',
-        'role_sd': 'Développeur Senior',
-        'role_ae': 'Ingénieur Son',
-        'role_nl': 'Responsable Narratif',
-        'game_desc_cyber': 'En 2099, les corporations dominent l\'horizon. Rejoignez la résistance dans ce RPG en monde ouvert où le piratage est votre arme.',
-        'game_desc_void': 'Échoué sur une station abandonnée, survivez à des entités qui vous traquent au son. Une expérience terrifiante compatible VR.',
-        'game_desc_neon': 'Courses synthwave à grande vitesse dans des villes procédurales. Affrontez les autres en ligne.',
-        'btn_buy': 'ACHETER',
-        'header_games': 'Jeux',
-        'contact_title': 'NOUS CONTACTER',
-        'contact_sub': 'REJOINDRE LA LISTE',
-        'contact_privacy': 'Nous ne vendons pas vos données personnelles. Nous détestons le spam.',
-        'btn_sub': 'S\'ABONNER',
-        'settings_title': 'PARAMÈTRES',
-        'lbl_lang': 'Langue',
-        'lbl_anim': 'Animations',
-        'btn_clear': 'Effacer Cookies'
-    },
-    'de': {
-        'nav_home': 'Startseite',
-        'nav_games': 'Spiele',
-        'nav_about': 'Über Uns',
-        'nav_contact': 'Kontakt',
-        'hero_rpg': 'Rollenspiel / Action',
-        'hero_horror': 'Horror / Überleben',
-        'hero_racing': 'Rennspiel / Arcade',
-        'home_title': 'WIR BAUEN WELTEN',
-        'home_desc': 'OTWT Studios widmet sich der Erweiterung der Grenzen interaktiver Unterhaltung. Wir kombinieren modernste Grafik mit tiefgründigem Gameplay.',
-        'btn_team': 'Triff das Team',
-        'stats_awards': 'Auszeichnungen',
-        'stats_players': 'Spieler',
-        'footer_touch': 'KONTAKT AUFNEHMEN',
-        'footer_rights': '© 2025 OTWT Studios. Alle Rechte vorbehalten.',
-        'about_mission': 'UNSERE MISSION',
-        'about_forge': 'DIE ZUKUNFT SCHMIEDEN',
-        'about_desc': 'OTWT Studios begann 2015 in einer Garage mit einem einfachen Traum: Spiele zu erschaffen, die Spieler in völlig neue Dimensionen entführen.',
-        'team_squad': 'DAS TEAM',
-        'role_cd': 'Kreativdirektor',
-        'role_le': 'Leitender Ingenieur',
-        'role_ad': 'Art Director',
-        'role_sd': 'Senior Entwickler',
-        'role_ae': 'Toningenieur',
-        'role_nl': 'Narrative Leitung',
-        'game_desc_cyber': 'Im Jahr 2099 beherrschen Konzerne die Skyline. Schließe dich dem Widerstand in diesem Open-World-RPG an.',
-        'game_desc_void': 'Gestrandet auf einer verlassenen Station müssen Sie Wesen überleben, die Sie anhand von Geräuschen aufspüren.',
-        'game_desc_neon': 'Hochgeschwindigkeits-Synthwave-Rennen durch prozedural generierte Städte. Kämpfe online um die Spitze.',
-        'btn_buy': 'KAUFEN',
-        'header_games': 'Spiele',
-        'contact_title': 'KONTAKTIERE UNS',
-        'contact_sub': 'NEWSLETTER ABONNIEREN',
-        'contact_privacy': 'Wir verkaufen Ihre Daten nicht. Wir hassen Spam auch.',
-        'btn_sub': 'ABONNIEREN',
-        'settings_title': 'EINSTELLUNGEN',
-        'lbl_lang': 'Sprache',
-        'lbl_anim': 'Animationen',
-        'btn_clear': 'Cookies Löschen'
-    }
-};
+// Global variable to hold fetched data
+let siteData = null;
 
 // --- COOKIE HELPERS ---
 function setCookie(name, value, days) {
@@ -145,30 +27,131 @@ function eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;';
 }
 
-// --- APP LOGIC ---
-document.addEventListener("DOMContentLoaded", () => {
+// --- INIT ---
+document.addEventListener("DOMContentLoaded", async () => {
+    
+    // 1. FETCH DATA
+    try {
+        const response = await fetch('data.json');
+        siteData = await response.json();
+        
+        // Once data is loaded, initialize everything
+        populateStaticContent();
+        initializeApp();
+    } catch (error) {
+        console.error("Error loading site data:", error);
+    }
+});
 
-    // 1. LANGUAGE SETUP
+function populateStaticContent() {
+    // 1. Header Company Info
+    const companyNameEls = document.querySelectorAll('.logo-text');
+    companyNameEls.forEach(el => {
+        el.innerHTML = `${siteData.company.name}`;
+    });
+    
+    const companyLogos = document.querySelectorAll('.company-logo');
+    companyLogos.forEach(img => img.src = siteData.company.logo_url);
+
+    // 2. Games Dropdown
+    const dropdown = document.querySelector('.dropdown-content');
+    if (dropdown) {
+        dropdown.innerHTML = ''; // Clear placeholders
+        siteData.games.forEach(game => {
+            const link = document.createElement('a');
+            link.href = game.link;
+            link.innerText = game.title;
+            dropdown.appendChild(link);
+        });
+    }
+
+    // 3. Hero Section (Index Only) - Backgrounds and Logos
+    siteData.games.forEach((game, index) => {
+        // Panel ID is assumed to be panel-1, panel-2 etc matching array order
+        const panel = document.getElementById(`panel-${index + 1}`);
+        if (panel) {
+            // Set background via JS so URL is in JSON
+            panel.style.backgroundImage = `url('${game.bg_image}')`;
+            
+            // Set Logo Image in the panel content
+            const logoImg = panel.querySelector('.game-logo');
+            if (logoImg) {
+                logoImg.src = game.logo_image;
+                logoImg.alt = game.title;
+            }
+        }
+    });
+
+    // 4. Team Members (About Page)
+    const teamGrid = document.querySelector('.team-grid');
+    if (teamGrid) {
+        teamGrid.innerHTML = ''; // Clear
+        siteData.team_members.forEach(member => {
+            const card = document.createElement('div');
+            card.className = 'member-card';
+            // Image URL from images object based on key
+            const imgSrc = siteData.images.team[member.img_key];
+            
+            card.innerHTML = `
+                <img src="${imgSrc}" alt="${member.name}">
+                <div class="member-info">
+                    <h3>${member.name}</h3>
+                    <p data-i18n="${member.role_key}"></p>
+                </div>
+            `;
+            teamGrid.appendChild(card);
+        });
+    }
+
+    // 5. Footer
+    const footerEmail = document.querySelector('footer p:nth-of-type(1)'); // Simple selector
+    if(footerEmail) footerEmail.innerText = siteData.company.email_press;
+    
+    const copyright = document.querySelector('.copyright');
+    if(copyright) {
+        // Preserve the translation attribute if needed, but setting text for year
+        // We can assume copyright text is handled by translation, but specific Year/Name comes from JSON
+        // For now, let's leave copyright to the Translation engine entirely
+    }
+    
+    // 6. Game Page Specifics (If on a game page)
+    const heroBg = document.querySelector('.game-hero-bg');
+    if (heroBg) {
+        // Find which game this is based on URL or specific ID on body/element
+        // Simple check: compare current filename to JSON links
+        const path = window.location.pathname;
+        const filename = path.substring(path.lastIndexOf('/') + 1);
+        
+        const game = siteData.games.find(g => g.link === filename);
+        if (game) {
+            heroBg.style.backgroundImage = `url('${game.bg_image}')`;
+            // Update title if it's generic in HTML
+            const titleEl = document.querySelector('.game-title-wrapper h1');
+            if(titleEl) titleEl.innerText = game.title;
+        }
+    }
+}
+
+function initializeApp() {
+    // --- LANGUAGE SETUP ---
     const langSelect = document.getElementById('lang-select');
     let currentLang = getCookie('nexus_lang');
     
-    // If no cookie, detect browser lang
     if (!currentLang) {
         const browserLang = navigator.language || navigator.userLanguage;
-        currentLang = browserLang.split('-')[0]; // e.g., 'en-US' -> 'en'
+        currentLang = browserLang.split('-')[0];
     }
+    
+    // Check against fetched translations
+    if (!siteData.translations[currentLang]) currentLang = 'en';
 
-    // Verify support, default to EN if not supported
-    if (!translations[currentLang]) currentLang = 'en';
-
-    // Apply
     if (langSelect) langSelect.value = currentLang;
     updateLanguage(currentLang);
 
-    // 2. ANIMATION SETUP
+    // --- ANIMATION SETUP ---
     const animCheck = document.getElementById('anim-check');
     const animCookie = getCookie('nexus_anim');
-    let animEnabled = true; // Default
+    let animEnabled = true; 
 
     if (animCookie !== null) {
         animEnabled = (animCookie === 'true');
@@ -177,8 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (animCheck) animCheck.checked = animEnabled;
     toggleAnimations(animEnabled);
 
-
-    // 3. EVENT LISTENERS (SETTINGS)
+    // --- EVENT LISTENERS ---
     if (langSelect) {
         langSelect.addEventListener('change', (e) => {
             const newLang = e.target.value;
@@ -205,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. SETTINGS POPUP LOGIC
+    // Settings Popup Logic
     const settingsBtn = document.getElementById('settingsBtn');
     const settingsPopup = document.getElementById('settingsPopup');
 
@@ -221,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. SCROLL LOGIC & HEADER
+    // Header Scroll Logic
     const navbar = document.getElementById('navbar');
     let lastScrollY = window.scrollY;
 
@@ -241,8 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 6. SCROLL FADE ANIMATION
-    // Only run if animations are enabled
+    // Scroll Animations
     if (animEnabled) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -262,17 +243,17 @@ document.addEventListener("DOMContentLoaded", () => {
             observer.observe(el);
         });
     } else {
-        // If animations off, ensure elements are visible
         document.querySelectorAll('.text-box, .stat-box, .game-description, .member-card, .contact-wrapper').forEach(el => {
             el.style.opacity = "1";
             el.style.transform = "none";
         });
     }
-});
+}
 
 function updateLanguage(lang) {
-    const data = translations[lang];
-    // Find all elements with data-i18n attribute
+    if (!siteData || !siteData.translations) return;
+    
+    const data = siteData.translations[lang];
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (data[key]) {

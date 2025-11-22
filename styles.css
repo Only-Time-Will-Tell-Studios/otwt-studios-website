@@ -7,6 +7,7 @@
     --header-height: 80px;
     --font-head: 'Orbitron', sans-serif;
     --font-body: 'Rajdhani', sans-serif;
+    --font-title: 'Megrim', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,46 +16,40 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
 /* --- UTILITY: NO ANIMATIONS --- */
-/* Utility class used to disable non-essential motion (set by user preference) */
 body.no-anim *, body.no-anim *::before, body.no-anim *::after {
     transition: none !important;
     animation: none !important;
 }
 
-/* Exceptions: keep interactive hover transitions and final visual state for hero panels.
-   When animations are turned off we still want the panels visible and responding to hover.
-   These rules re-enable only the interactive transitions we want to preserve. */
+/* Exceptions for functionality in no-anim mode */
 body.no-anim .game-panel {
-    animation: none !important; /* stop entrance keyframes */
-    transform: none !important; /* ensure panels sit in final position */
-    opacity: 1 !important; /* make sure they are visible */
-    /* re-enable the interactive flex transition and filter so hover still works */
+    animation: none !important; 
+    transform: none !important; 
+    opacity: 1 !important; 
     transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important, filter 0.3s ease !important;
 }
-body.no-anim .panel-content {
-    /* allow panel content reveal on hover but keep its initial hidden state */
+body.no-anim .panel-content, body.no-anim .game-logo {
     transition: all 0.4s ease !important;
 }
 body.no-anim .hero-container:hover .game-panel:not(:hover) {
-    /* keep the dimming effect on non-hovered panels */
     filter: grayscale(0.8) brightness(0.6) !important;
 }
 
 /* --- NAVIGATION --- */
 .navbar {
     position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
-    padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;
+    padding-inline: 3vw; display: flex; align-items: center;
     z-index: 1000; background: rgba(11, 11, 11, 0.9); backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease-in-out;
 }
 .navbar.hidden { transform: translateY(-100%); }
 
-.nav-left { display: flex; align-items: center; gap: 1rem; }
+.nav-left { display: flex; align-items: center; gap: 1rem; margin-inline-end: auto; }
 .company-logo { width: 40px; height: 40px; filter: drop-shadow(0 0 5px var(--accent)); }
-.logo-text { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; }
+.logo-text { font-family: var(--font-title); font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; }
 .accent { color: var(--accent); }
 
-.nav-links { display: flex; gap: 2rem; align-items: center; height: 100%; }
+.nav-links { display: flex; gap: clamp(2vw, 2.2vmin, 3vw); align-items: center; height: 100%; }
 .nav-links > li { position: relative; height: 100%; display: flex; align-items: center; }
 .nav-links a {
     font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase;
@@ -80,10 +75,10 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) {
     text-align: center; font-size: 0.85rem;
 }
 .dropdown-content a:hover { background: rgba(0, 243, 255, 0.1); }
-.dropdown-content a::after { display: none; } /* Remove underline effect for dropdown items */
+.dropdown-content a::after { display: none; }
 
 /* SETTINGS */
-.nav-right { position: relative; display: flex; align-items: center; }
+.nav-right { position: relative; display: flex; align-items: center; margin-inline-start: 2vw; }
 .settings-icon { font-size: 1.2rem; color: #fff; cursor: pointer; transition: transform 0.5s, color 0.3s; }
 .settings-icon:hover { transform: rotate(90deg); color: var(--accent); }
 .settings-popup {
@@ -101,67 +96,70 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) {
 .clear-btn { width: 100%; background: #333; color: #fff; border: none; padding: 0.5rem; margin-top: 0.5rem; cursor: pointer; font-family: var(--font-body); text-transform: uppercase; transition: background 0.2s; }
 .clear-btn:hover { background: #c00; }
 
-/* Toggle capsule for animations using label + span for reliable pseudo-element styling */
+/* Toggle switch */
 .toggle { display: inline-block; vertical-align: middle; position: relative; }
-.toggle input { /* keep input accessible but visually hidden and confined to the label */
-    position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; z-index: 2; cursor: pointer;
-}
+.toggle input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; z-index: 2; cursor: pointer; }
 .toggle-track {
     display: inline-block; width: 52px; height: 28px; background: #151515; border-radius: 999px; position: relative;
-    transition: background 220ms cubic-bezier(0.22, 1, 0.36, 1);
-    box-sizing: border-box;
+    transition: background 220ms cubic-bezier(0.22, 1, 0.36, 1); box-sizing: border-box;
 }
 .toggle-track::before {
-    content: '';
-    position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; background: #ffffff; border-radius: 50%;
-    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.36);
+    content: ''; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; background: #ffffff; border-radius: 50%;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms; box-shadow: 0 4px 10px rgba(0,0,0,0.36);
 }
-
 .toggle input:checked + .toggle-track { background: var(--accent); }
 .toggle input:checked + .toggle-track::before { transform: translateX(24px); }
 .toggle input:focus + .toggle-track { box-shadow: 0 0 0 6px rgba(0,243,255,0.06); }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Dropdown needs to preserve its horizontal centering (translateX(-50%)).
-   fadeInDropdown animates both translateX and translateY so the dropdown
-   doesn't jump to the right while the animation is running. */
 @keyframes fadeInDropdown {
     from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
     to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 /* --- HERO ACCORDION --- */
-/* Fix for scroll bug: Strict Height and Hidden Overflow */
 .hero-container { 
-    height: 100vh; 
-    width: 100%; 
-    display: flex; 
-    overflow: hidden; 
-    margin-top: 0; 
-    padding-top: var(--header-height); 
-    position: relative;
+    height: 100vh; width: 100%; display: flex; overflow: hidden; 
+    margin-top: 0; padding-top: var(--header-height); position: relative;
 }
 .game-panel {
     flex: 1; position: relative; height: 100%;
     transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-    overflow: hidden; display: flex; align-items: flex-end; padding: 2rem;
-    border-right: 1px solid rgba(0,0,0,0.5); cursor: pointer;
+    overflow: hidden; display: flex; 
+    /* Changed alignment to center for the logo pop-up */
+    align-items: center; justify-content: center;
+    padding: 2rem; border-right: 1px solid rgba(0,0,0,0.5); cursor: pointer;
     transform: translateX(-100%); animation: slideIn 0.8s forwards ease-out; opacity: 0;
+    /* Background images now set via JS */
+    background-size: cover; background-position: center; background-repeat: no-repeat;
 }
-#panel-1 { background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat; animation-delay: 0.1s; }
-#panel-2 { background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop') center/cover no-repeat; animation-delay: 0.3s; }
-#panel-3 { background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat; animation-delay: 0.5s; }
 
 .game-panel:hover { flex: 2.5; filter: brightness(1.1); }
 .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0.8) brightness(0.6); }
-.panel-content { z-index: 2; transform: translateY(0px); opacity: 0; transition: all 0.4s ease; }
-.game-panel:hover .panel-content { transform: translateY(0); opacity: 1; }
-.panel-content h2 {
-    font-family: var(--font-head); font-size: 2.5rem; text-shadow: 0 0 10px rgba(0,0,0,0.8); margin-bottom: 0.5rem;
-    background: linear-gradient(45deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+
+.panel-content {
+    z-index: 2; width: 100%; text-align: center;
+    /* Logo styling */
+    display: flex; justify-content: center; align-items: center;
 }
+
+/* Logo Styles for Hero */
+.game-logo {
+    max-width: 500px; /* Adjust size */
+    width: 80%;
+    height: auto;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.6));
+}
+
+/* When hovering panel, show logo */
+.game-panel:hover .game-logo {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 1; }
 @keyframes slideIn { to { transform: translateX(0); opacity: 1; } }
 
