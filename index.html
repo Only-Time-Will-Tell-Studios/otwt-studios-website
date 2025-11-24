@@ -17,40 +17,53 @@
             <div class="logo-text">Only Time Will Tell</div>
         </div>
 
-        <ul class="nav-links">
-            <li><a href="index.html" class="active" data-i18n="nav_home">Home</a></li>
-            <li>
-                <span href="#" data-i18n="nav_games">Games</span>
-                <div class="dropdown-content">
-                    <!-- Links populated by JS from JSON -->
-                </div>
-            </li>
-            <li><a href="about.html" data-i18n="nav_about">About</a></li>
-            <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
-        </ul>
+        <!-- Hamburger Icon (Visible only on mobile) -->
+        <div class="hamburger" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-        <div class="nav-right">
-            <div class="settings-container">
-                <i class="fa-solid fa-gear settings-icon" id="settingsBtn"></i>
-                <div class="settings-popup" id="settingsPopup">
-                    <h4 data-i18n="settings_title">SETTINGS</h4>
-                    <div class="setting-item">
-                        <label for="lang-select" data-i18n="lbl_lang">Language</label>
-                        <select id="lang-select">
-                            <option value="en">English</option>
-                            <option value="fr">Français</option>
-                            <option value="de">Deutsch</option>
-                            <option value="jp">日本語 (Japanese)</option>
-                        </select>
+        <!-- Wrapper for Links and Settings (Collapsible on mobile) -->
+        <div class="nav-elements" id="navElements">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active" data-i18n="nav_home">Home</a></li>
+                <li class="dropdown-trigger">
+                    <span data-i18n="nav_games">Games</span>
+                    <div class="dropdown-content">
+                        <!-- Links populated by JS from JSON -->
                     </div>
-                    <div class="setting-row">
-                        <span data-i18n="lbl_anim">Animations</span>
-                        <label class="toggle">
-                            <input type="checkbox" id="anim-check" checked>
-                            <span class="toggle-track" aria-hidden="true"></span>
-                        </label>
+                </li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
+                <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="settings-container">
+                    <!-- On Mobile, text is helpful next to the icon since it's a list -->
+                    <div class="mobile-settings-label">Settings</div> 
+                    <i class="fa-solid fa-gear settings-icon" id="settingsBtn"></i>
+                    
+                    <div class="settings-popup" id="settingsPopup">
+                        <h4 data-i18n="settings_title">SETTINGS</h4>
+                        <div class="setting-item">
+                            <label for="lang-select" data-i18n="lbl_lang">Language</label>
+                            <select id="lang-select">
+                                <option value="en">English</option>
+                                <option value="fr">Français</option>
+                                <option value="de">Deutsch</option>
+                                <option value="jp">日本語 (Japanese)</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <span data-i18n="lbl_anim">Animations</span>
+                            <label class="toggle">
+                                <input type="checkbox" id="anim-check" checked>
+                                <span class="toggle-track" aria-hidden="true"></span>
+                            </label>
+                        </div>
+                        <button class="clear-btn" id="clearCookies" data-i18n="btn_clear">Clear Cookies</button>
                     </div>
-                    <button class="clear-btn" id="clearCookies" data-i18n="btn_clear">Clear Cookies</button>
                 </div>
             </div>
         </div>
@@ -59,7 +72,7 @@
     <!-- Hero Section: The Game Accordion -->
     <section class="hero-container">
         <!-- Game 1 -->
-        <a href="cyber-revolt.html" class="game-panel" id="panel-1">
+        <a href="cyber-revolt.html" class="game-panel mobile-focus" id="panel-1">
             <div class="panel-content">
                 <img src="" class="game-logo" alt="Cyber Revolt">
             </div>
@@ -67,9 +80,9 @@
         </a>
 
         <!-- Game 2 -->
-        <a href="underfjord.html" class="game-panel" id="panel-2">
+        <a href="into-the-void.html" class="game-panel" id="panel-2">
             <div class="panel-content">
-                <img src="" class="game-logo" alt="Underfjord">
+                <img src="" class="game-logo" alt="Into The Void">
             </div>
             <div class="overlay"></div>
         </a>
@@ -108,14 +121,20 @@
             <h3 data-i18n="footer_touch">GET IN TOUCH</h3>
             <p class="email">press@otwtstudios.com</p>
             <div class="socials">
+                <!-- Top Row -->
                 <a class="youtube_link" href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a>
                 <a class="instagram_link" href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
+                
+                <!-- Break for mobile -->
+                <div class="social-break"></div> 
+
+                <!-- Bottom Row -->
                 <a class="discord_link" href="#"><i class="fa-brands fa-discord"></i> DISCORD</a>
                 <a class="steam link" href="#"><i class="fa-brands fa-steam"></i> STEAM</a>
             </div>
             <p>
                 <span class="copyright">© 2025 OTWT Studios.</span>
-                <span class="copyright" data-i18n="footer_rights">="footer_rights" All Rights Reserved.</span>
+                <span class="copyright" data-i18n="footer_rights">All Rights Reserved.</span>
             </p>
         </div>
     </footer>

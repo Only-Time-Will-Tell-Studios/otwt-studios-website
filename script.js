@@ -56,7 +56,7 @@ function populateStaticContent() {
     // 2. Games Dropdown
     const dropdown = document.querySelector('.dropdown-content');
     if (dropdown) {
-        dropdown.innerHTML = ''; // Clear placeholders
+        dropdown.innerHTML = ''; 
         siteData.games.forEach(game => {
             const link = document.createElement('a');
             link.href = game.link;
@@ -65,15 +65,11 @@ function populateStaticContent() {
         });
     }
 
-    // 3. Hero Section (Index Only) - Backgrounds and Logos
+    // 3. Hero Section (Index Only)
     siteData.games.forEach((game, index) => {
-        // Panel ID is assumed to be panel-1, panel-2 etc matching array order
         const panel = document.getElementById(`panel-${index + 1}`);
         if (panel) {
-            // Set background via JS so URL is in JSON
             panel.style.backgroundImage = `url('${game.bg_image}')`;
-            
-            // Set Logo Image in the panel content
             const logoImg = panel.querySelector('.game-logo');
             if (logoImg) {
                 logoImg.src = game.logo_image;
@@ -82,14 +78,13 @@ function populateStaticContent() {
         }
     });
 
-    // 4. Team Members (About Page)
+    // 4. Team Members
     const teamGrid = document.querySelector('.team-grid');
     if (teamGrid) {
-        teamGrid.innerHTML = ''; // Clear
+        teamGrid.innerHTML = ''; 
         siteData.team_members.forEach(member => {
             const card = document.createElement('div');
             card.className = 'member-card';
-            // Image URL from images object based on key
             const imgSrc = siteData.images.team[member.img_key];
             
             card.innerHTML = `
@@ -103,12 +98,10 @@ function populateStaticContent() {
         });
     }
 
-    // 5. Contact Page Email
+    // 5. Contact/Footer Email
     const contactEmail = document.querySelector('div.contact-wrapper p.email');
     if(contactEmail) contactEmail.innerText = `${siteData.company.email_press}`;
-
-    // 6. Footer
-    const footerEmail = document.querySelector('footer p.email'); // Simple selector
+    const footerEmail = document.querySelector('footer p.email');
     if(footerEmail) footerEmail.innerText = siteData.company.email_press;
     
     const copyright = document.querySelector('.copyright');
@@ -116,36 +109,26 @@ function populateStaticContent() {
         copyright.innerText = `© ${siteData.company.copyright_year} ${siteData.company.name}.`;
     }
 
-    // 7. Socials Links (Footer and Contact)
-    const discordLinks = document.querySelectorAll('a.discord_link');
-    discordLinks.forEach(link => {
-        link.href = siteData.links.socials.discord;
-    });
-    const steamLinks = document.querySelectorAll('a.steam.link');
-    steamLinks.forEach(link => {
-        link.href = siteData.links.socials.steam;
-    });
-    const youtubeLinks = document.querySelectorAll('a.youtube_link');
-    youtubeLinks.forEach(link => {
-        link.href = siteData.links.socials.youtube;
-    });
-    const instagramLinks = document.querySelectorAll('a.instagram_link');
-    instagramLinks.forEach(link => {
-        link.href = siteData.links.socials.instagram;
-    });
+    // 7. Socials Links
+    if (siteData.links && siteData.links.socials) {
+        const discordLinks = document.querySelectorAll('a.discord_link');
+        discordLinks.forEach(link => link.href = siteData.links.socials.discord);
+        const steamLinks = document.querySelectorAll('a.steam.link');
+        steamLinks.forEach(link => link.href = siteData.links.socials.steam);
+        const youtubeLinks = document.querySelectorAll('a.youtube_link');
+        youtubeLinks.forEach(link => link.href = siteData.links.socials.youtube);
+        const instagramLinks = document.querySelectorAll('a.instagram_link');
+        instagramLinks.forEach(link => link.href = siteData.links.socials.instagram);
+    }
     
-    // 8. Game Page Specifics (If on a game page)
+    // 8. Game Page Specifics
     const heroBg = document.querySelector('.game-hero-bg');
     if (heroBg) {
-        // Find which game this is based on URL or specific ID on body/element
-        // Simple check: compare current filename to JSON links
         const path = window.location.pathname;
         const filename = path.substring(path.lastIndexOf('/') + 1);
-        
         const game = siteData.games.find(g => g.link === filename);
         if (game) {
             heroBg.style.backgroundImage = `url('${game.bg_image}')`;
-            // Update title if it's generic in HTML
             const titleEl = document.querySelector('.game-title-wrapper h1');
             if(titleEl) titleEl.innerText = game.title;
         }
@@ -156,13 +139,10 @@ function initializeApp() {
     // --- LANGUAGE SETUP ---
     const langSelect = document.getElementById('lang-select');
     let currentLang = getCookie('nexus_lang');
-    
     if (!currentLang) {
         const browserLang = navigator.language || navigator.userLanguage;
         currentLang = browserLang.split('-')[0];
     }
-    
-    // Check against fetched translations
     if (!siteData.translations[currentLang]) currentLang = 'en';
 
     if (langSelect) langSelect.value = currentLang;
@@ -172,11 +152,7 @@ function initializeApp() {
     const animCheck = document.getElementById('anim-check');
     const animCookie = getCookie('nexus_anim');
     let animEnabled = true; 
-
-    if (animCookie !== null) {
-        animEnabled = (animCookie === 'true');
-    }
-
+    if (animCookie !== null) animEnabled = (animCookie === 'true');
     if (animCheck) animCheck.checked = animEnabled;
     toggleAnimations(animEnabled);
 
@@ -207,7 +183,7 @@ function initializeApp() {
         });
     }
 
-    // Settings Popup Logic
+    // Settings Popup (Desktop) / Inline (Mobile)
     const settingsBtn = document.getElementById('settingsBtn');
     const settingsPopup = document.getElementById('settingsPopup');
 
@@ -223,7 +199,18 @@ function initializeApp() {
         });
     }
 
-    // Header Scroll Logic
+    // --- HAMBURGER MENU LOGIC ---
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navElements = document.getElementById('navElements');
+    
+    if (hamburgerBtn && navElements) {
+        hamburgerBtn.addEventListener('click', () => {
+            navElements.classList.toggle('active');
+            // Animate hamburger icon (optional transformation can be added in CSS)
+        });
+    }
+
+    // Header Scroll Logic (Hide/Show)
     const navbar = document.getElementById('navbar');
     let lastScrollY = window.scrollY;
 
@@ -231,6 +218,8 @@ function initializeApp() {
         const currentScrollY = window.scrollY;
         if (currentScrollY > 50 && currentScrollY > lastScrollY) {
             navbar.classList.add('hidden');
+            // Close mobile menu on scroll down
+            if(navElements) navElements.classList.remove('active');
         } else if (currentScrollY < 10) {
             navbar.classList.remove('hidden');
         }
@@ -243,7 +232,10 @@ function initializeApp() {
         }
     });
 
-    // Scroll Animations
+    // --- MOBILE HERO SCROLL LOGIC ---
+    initMobileHero();
+
+    // Scroll Animations (Observer)
     if (animEnabled) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -267,6 +259,34 @@ function initializeApp() {
             el.style.opacity = "1";
             el.style.transform = "none";
         });
+    }
+}
+
+function initMobileHero() {
+    // Only run if we have game panels (Home page)
+    const panels = document.querySelectorAll('.game-panel');
+    if (panels.length === 0) return;
+
+    // Check if we are on mobile
+    if (window.innerWidth <= 768) {
+        const observerOptions = {
+            root: null,
+            threshold: 0.5, // Trigger when 50% of the panel is visible
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove focus from all
+                    panels.forEach(p => p.classList.remove('mobile-focus'));
+                    // Add focus to current
+                    entry.target.classList.add('mobile-focus');
+                }
+            });
+        }, observerOptions);
+
+        panels.forEach(panel => observer.observe(panel));
     }
 }
 
