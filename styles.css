@@ -22,10 +22,9 @@ body.no-anim *, body.no-anim *::before, body.no-anim *::after {
 }
 body.no-anim .game-panel {
     animation: none !important; transform: none !important; opacity: 1 !important; 
-    transition: flex 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) !important, filter 0.3s ease !important;
+    transition: top 0.5s ease, height 0.5s ease, filter 0.3s ease !important;
 }
 body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease !important; }
-body.no-anim .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0.8) brightness(0.6) !important; }
 
 /* --- NAVIGATION --- */
 .navbar {
@@ -36,9 +35,13 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0
 }
 .navbar.hidden { transform: translateY(-100%); }
 
-.nav-left { display: flex; align-items: center; gap: 1rem; z-index: 1002; }
-.company-logo { width: 40px; height: 40px; filter: drop-shadow(0 0 4px var(--accent)); margin-bottom: 2px; }
-.logo-text { font-family: var(--font-title); font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; }
+.nav-left { display: flex; align-items: center; gap: 1rem; z-index: 1002; max-width: 70%; }
+.company-logo { width: 40px; height: 40px; filter: drop-shadow(0 0 4px var(--accent)); margin-bottom: 2px; flex-shrink: 0; }
+/* Fix: Prevent wrapping */
+.logo-text { 
+    font-family: var(--font-title); font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .accent { color: var(--accent); }
 
 /* Container for Links and Settings */
@@ -59,12 +62,17 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0
 
 /* DROPDOWN MENU */
 .dropdown-content {
-    display: none; position: absolute; top: var(--header-height); left: 50%;
+    display: none; position: absolute; 
+    /* Fix: Remove gap by setting top to 100% */
+    top: 100%; left: 50%;
     transform: translateX(-50%); background: #1a1a1a; min-width: 200px;
     border: 1px solid var(--accent); border-top: none;
     box-shadow: 0 10px 20px rgba(0,0,0,0.8); z-index: 1001;
 }
-.nav-links li:hover .dropdown-content { display: block; animation: fadeInDropdown 0.2s ease; }
+/* Desktop Hover Logic */
+@media (min-width: 769px) {
+    .nav-links li:hover .dropdown-content { display: block; animation: fadeInDropdown 0.2s ease; }
+}
 .dropdown-content a { display: block; padding: 1rem; border-bottom: 1px solid #333; text-align: center; font-size: 0.85rem; }
 .dropdown-content a:hover { background: rgba(0, 243, 255, 0.1); }
 
@@ -163,7 +171,18 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0
 
 /* --- ABOUT & TEAM --- */
 .page-header { padding-top: 150px; padding-bottom: 50px; text-align: center; background: linear-gradient(to bottom, #111, var(--bg-color)); }
-.page-header h1 { font-family: var(--font-head); font-size: 4rem; color: var(--accent); }
+/* Fix: Fluid Font Size for Titles */
+.page-header h1, .game-title-wrapper h1 { 
+    font-family: var(--font-head); 
+    /* Clamp font size between 2rem and 4rem based on viewport width */
+    font-size: clamp(2rem, 8vw, 4rem); 
+    color: var(--accent);
+    /* Ensure text wraps and doesn't overflow */
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
 .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
 .member-card {
     background: #151515; border: 1px solid #333; overflow: hidden; position: relative;
@@ -186,8 +205,7 @@ body.no-anim .hero-container:hover .game-panel:not(:hover) { filter: grayscale(0
 /* --- GAME PAGE SPECIFIC --- */
 .game-header { height: 60vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: var(--header-height); }
 .game-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.5); z-index: -1; }
-.game-title-wrapper { text-align: center; }
-.game-title-wrapper h1 { font-size: 4rem; font-family: var(--font-head); margin-bottom: 1rem; }
+.game-title-wrapper { text-align: center; width: 90%; }
 .genre-tag { border: 1px solid var(--accent); color: var(--accent); padding: 0.5rem 1rem; text-transform: uppercase; }
 .game-info { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: -50px; position: relative; z-index: 2; background: var(--bg-color); padding: 3rem; border-top: 2px solid var(--accent); }
 .media-placeholder { width: 100%; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; border: 1px dashed #444; }
@@ -214,34 +232,55 @@ footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1
     .nav-elements.active { right: 0; }
 
     .nav-links { flex-direction: column; width: 100%; height: auto; gap: 1.5rem; align-items: flex-start; }
-    .nav-links > li { width: 100%; justify-content: flex-start; }
-    .nav-links a, .nav-links span { font-size: 1.2rem; }
+    .nav-links > li { width: 100%; justify-content: flex-start; flex-direction: column; align-items: flex-start; }
+    .nav-links a, .nav-links span { font-size: 1.2rem; width: 100%; display: block; }
     
-    /* Dropdown in mobile menu */
-    .dropdown-content { position: relative; top: 0; left: 0; transform: none; width: 100%; box-shadow: none; background: transparent; border: none; padding-left: 1rem; display: none; }
-    .nav-links li:hover .dropdown-content { display: block; animation: none; } /* Simple block display on hover/tap */
+    /* Dropdown in mobile menu (Click based) */
+    .dropdown-content { 
+        position: relative; top: 0; left: 0; transform: none; width: 100%; 
+        box-shadow: none; background: transparent; border: none; 
+        padding-left: 1rem; display: none; 
+    }
+    /* Class toggled by JS */
+    .dropdown-content.show { display: block; } 
     .dropdown-content a { text-align: left; padding: 0.5rem 0; border-bottom: none; color: #aaa; }
 
     /* Settings in mobile menu */
     .nav-right { width: 100%; margin: 2rem 0 0 0; border-top: 1px solid #333; padding-top: 1.5rem; justify-content: flex-start; }
-    .mobile-settings-label { display: block; color: #fff; }
-    .settings-popup { top: auto; bottom: 0; left: 0; right: auto; width: 100%; position: relative; box-shadow: none; border: none; background: transparent; clip-path: none; padding: 1rem 0; display: flex; }
-
-    /* HERO ACCORDION: Stacked & Scroll-based */
-    .hero-container { flex-direction: column; padding-top: var(--header-height); }
-    .game-panel { 
-        width: 100%; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.5);
-        flex: 1; /* Default contracted state */
-        transform: translateX(0); transform: translateY(100%); animation: slideUp 0.8s forwards;
-        transition: flex 0.5s ease; /* Smooth height transition */
-        min-height: 150px;
+    /* Hide the icon on mobile, show label */
+    .settings-icon { display: none; }
+    .mobile-settings-label { display: block; color: #fff; width: 100%; margin-bottom: 1rem; }
+    
+    .settings-popup { 
+        top: auto; bottom: 0; left: 0; right: auto; width: 100%; 
+        position: relative; box-shadow: none; border: none; 
+        background: transparent; clip-path: none; padding: 0; 
+        display: flex; /* Always show inputs in mobile */
+        opacity: 1; animation: none;
     }
-    /* Class applied via JS IntersectionObserver */
-    .game-panel.mobile-focus { flex: 3; filter: brightness(1.1); }
-    .game-panel.mobile-focus .game-logo { opacity: 1; transform: scale(1); }
-    .game-panel:not(.mobile-focus) { filter: grayscale(0.9) brightness(0.5); }
 
-    @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+    /* HERO ACCORDION: Vertical Carousel */
+    .hero-container { 
+        padding-top: var(--header-height); 
+        position: relative; /* Container is reference */
+    }
+    .game-panel { 
+        position: absolute; /* Stacked */
+        left: 0; width: 100%; 
+        border-right: none; 
+        border-bottom: 1px solid rgba(0,0,0,0.5);
+        transition: top 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+        /* Remove Flex logic on mobile */
+        flex: none; 
+        transform: translateX(0);
+        animation: none; opacity: 1;
+    }
+    
+    /* Mobile States defined by JS classes/styles, but basic styles here */
+    .game-panel.mobile-active { z-index: 10; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .game-panel.mobile-active .game-logo { opacity: 1; transform: scale(1); }
+    .game-panel:not(.mobile-active) .game-logo { opacity: 0; }
+    .game-panel:not(.mobile-active) { filter: grayscale(0.9) brightness(0.5); z-index: 1; }
 
     /* SECTIONS */
     .content-grid, .game-info, .contact-wrapper { grid-template-columns: 1fr; }
@@ -249,10 +288,10 @@ footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1
 
     /* TEAM: Full Images */
     .member-card { height: auto; }
-    .member-card img { height: auto; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; /* Ensure consistent square or ratio */ }
+    .member-card img { height: auto; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
     
     /* FOOTER: 2 Rows */
-    .social-break { display: block; height: 10px; } /* Force break */
+    .social-break { display: block; height: 10px; }
     .socials { justify-content: center; }
     .socials a { width: auto; margin: 5px 15px; }
 }

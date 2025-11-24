@@ -17,30 +17,32 @@
             <div class="logo-text">Only Time Will Tell</div>
         </div>
 
-        <!-- Hamburger Icon (Visible only on mobile) -->
+        <!-- Hamburger Icon -->
         <div class="hamburger" id="hamburgerBtn">
             <span></span>
             <span></span>
             <span></span>
         </div>
 
-        <!-- Wrapper for Links and Settings (Collapsible on mobile) -->
+        <!-- Wrapper for Links and Settings -->
         <div class="nav-elements" id="navElements">
             <ul class="nav-links">
                 <li><a href="index.html" class="active" data-i18n="nav_home">Home</a></li>
+                
+                <!-- Added dropdown-trigger class for Mobile Click Logic -->
                 <li class="dropdown-trigger">
                     <span data-i18n="nav_games">Games</span>
                     <div class="dropdown-content">
-                        <!-- Links populated by JS from JSON -->
+                        <!-- Links populated by JS -->
                     </div>
                 </li>
+                
                 <li><a href="about.html" data-i18n="nav_about">About</a></li>
                 <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
             </ul>
 
             <div class="nav-right">
                 <div class="settings-container">
-                    <!-- On Mobile, text is helpful next to the icon since it's a list -->
                     <div class="mobile-settings-label">Settings</div> 
                     <i class="fa-solid fa-gear settings-icon" id="settingsBtn"></i>
                     
@@ -69,17 +71,15 @@
         </div>
     </nav>
 
-    <!-- Hero Section: The Game Accordion -->
+    <!-- Hero Section -->
     <section class="hero-container">
-        <!-- Game 1 -->
-        <a href="cyber-revolt.html" class="game-panel mobile-focus" id="panel-1">
+        <a href="cyber-revolt.html" class="game-panel" id="panel-1">
             <div class="panel-content">
                 <img src="" class="game-logo" alt="Cyber Revolt">
             </div>
             <div class="overlay"></div>
         </a>
 
-        <!-- Game 2 -->
         <a href="into-the-void.html" class="game-panel" id="panel-2">
             <div class="panel-content">
                 <img src="" class="game-logo" alt="Into The Void">
@@ -87,7 +87,6 @@
             <div class="overlay"></div>
         </a>
 
-        <!-- Game 3 -->
         <a href="neon-drifter.html" class="game-panel" id="panel-3">
             <div class="panel-content">
                 <img src="" class="game-logo" alt="Neon Drifter">
@@ -121,14 +120,9 @@
             <h3 data-i18n="footer_touch">GET IN TOUCH</h3>
             <p class="email">press@otwtstudios.com</p>
             <div class="socials">
-                <!-- Top Row -->
                 <a class="youtube_link" href="#"><i class="fa-brands fa-youtube"></i> YOUTUBE</a>
                 <a class="instagram_link" href="#"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
-                
-                <!-- Break for mobile -->
                 <div class="social-break"></div> 
-
-                <!-- Bottom Row -->
                 <a class="discord_link" href="#"><i class="fa-brands fa-discord"></i> DISCORD</a>
                 <a class="steam link" href="#"><i class="fa-brands fa-steam"></i> STEAM</a>
             </div>

@@ -70,6 +70,8 @@ function populateStaticContent() {
         const panel = document.getElementById(`panel-${index + 1}`);
         if (panel) {
             panel.style.backgroundImage = `url('${game.bg_image}')`;
+            // Store the link as a data attribute for the click handler logic
+            panel.dataset.link = game.link;
             const logoImg = panel.querySelector('.game-logo');
             if (logoImg) {
                 logoImg.src = game.logo_image;
@@ -183,7 +185,7 @@ function initializeApp() {
         });
     }
 
-    // Settings Popup (Desktop) / Inline (Mobile)
+    // Settings Popup (Desktop)
     const settingsBtn = document.getElementById('settingsBtn');
     const settingsPopup = document.getElementById('settingsPopup');
 
@@ -206,7 +208,19 @@ function initializeApp() {
     if (hamburgerBtn && navElements) {
         hamburgerBtn.addEventListener('click', () => {
             navElements.classList.toggle('active');
-            // Animate hamburger icon (optional transformation can be added in CSS)
+        });
+    }
+
+    // --- MOBILE NAV DROPDOWN CLICK LOGIC ---
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    if (dropdownTrigger) {
+        dropdownTrigger.addEventListener('click', (e) => {
+            // Only on mobile (simple check width)
+            if (window.innerWidth <= 768) {
+                e.stopPropagation();
+                const content = dropdownTrigger.querySelector('.dropdown-content');
+                content.classList.toggle('show');
+            }
         });
     }
 
@@ -218,7 +232,6 @@ function initializeApp() {
         const currentScrollY = window.scrollY;
         if (currentScrollY > 50 && currentScrollY > lastScrollY) {
             navbar.classList.add('hidden');
-            // Close mobile menu on scroll down
             if(navElements) navElements.classList.remove('active');
         } else if (currentScrollY < 10) {
             navbar.classList.remove('hidden');
@@ -232,8 +245,8 @@ function initializeApp() {
         }
     });
 
-    // --- MOBILE HERO SCROLL LOGIC ---
-    initMobileHero();
+    // --- MOBILE HERO CAROUSEL ---
+    initVerticalCarousel();
 
     // Scroll Animations (Observer)
     if (animEnabled) {
@@ -262,32 +275,112 @@ function initializeApp() {
     }
 }
 
-function initMobileHero() {
-    // Only run if we have game panels (Home page)
-    const panels = document.querySelectorAll('.game-panel');
+// --- VERTICAL CAROUSEL LOGIC ---
+function initVerticalCarousel() {
+    const panels = Array.from(document.querySelectorAll('.game-panel'));
     if (panels.length === 0) return;
 
-    // Check if we are on mobile
-    if (window.innerWidth <= 768) {
-        const observerOptions = {
-            root: null,
-            threshold: 0.5, // Trigger when 50% of the panel is visible
-            rootMargin: "0px"
-        };
+    // Configuration
+    const focusedIndex = 1; // 0-based index. 1 means the 2nd panel is focused.
+    let carouselInterval;
+    let currentShift = 0; // Tracks rotation
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Remove focus from all
-                    panels.forEach(p => p.classList.remove('mobile-focus'));
-                    // Add focus to current
-                    entry.target.classList.add('mobile-focus');
-                }
+    // Update layout based on current shift
+    function updateCarousel() {
+        // Only run logic on mobile
+        if (window.innerWidth > 768) {
+            // Reset styles for desktop
+            panels.forEach(p => {
+                p.style.top = '';
+                p.style.height = '';
+                p.classList.remove('mobile-active');
             });
-        }, observerOptions);
+            return;
+        }
 
-        panels.forEach(panel => observer.observe(panel));
+        const total = panels.length;
+        
+        panels.forEach((panel, index) => {
+            // Calculate where this panel sits in the visual order
+            // (index + shift) % total handles the rotation
+            let visualIndex = (index + currentShift) % total;
+            if (visualIndex < 0) visualIndex += total;
+
+            // Remove focus class
+            panel.classList.remove('mobile-active');
+
+            // Logic for Top, Height, and Focus
+            if (visualIndex === focusedIndex) {
+                // Focused Panel
+                panel.style.top = '25%'; // Starts 25% down
+                panel.style.height = '50%'; // Takes up 50% space
+                panel.style.zIndex = 10;
+                panel.classList.add('mobile-active');
+            } else if (visualIndex < focusedIndex) {
+                // Panels Above
+                panel.style.top = '0%';
+                panel.style.height = '25%';
+                panel.style.zIndex = 1;
+            } else {
+                // Panels Below
+                panel.style.top = '75%';
+                panel.style.height = '25%';
+                panel.style.zIndex = 1;
+            }
+        });
     }
+
+    // Auto Rotate
+    function startRotation() {
+        carouselInterval = setInterval(() => {
+            currentShift++; 
+            updateCarousel();
+        }, 4000); // Rotate every 4 seconds
+    }
+
+    function stopRotation() {
+        clearInterval(carouselInterval);
+    }
+
+    // Initial Render
+    updateCarousel();
+    startRotation();
+
+    // Handle Resize
+    window.addEventListener('resize', updateCarousel);
+
+    // Handle Clicks
+    panels.forEach((panel, index) => {
+        panel.addEventListener('click', (e) => {
+            if (window.innerWidth > 768) return; // Let standard link behavior work on desktop
+
+            e.preventDefault(); // Stop immediate link navigation
+            stopRotation(); // Stop auto rotation on interaction
+
+            const total = panels.length;
+            let visualIndex = (index + currentShift) % total;
+            if (visualIndex < 0) visualIndex += total;
+
+            if (visualIndex === focusedIndex) {
+                // It was already focused, go to link
+                window.location.href = panel.dataset.link;
+            } else {
+                // It was contracted, rotate it into focus
+                // Calculate how much we need to shift to make this index === focusedIndex
+                // Diff = focusedIndex - visualIndex
+                const diff = focusedIndex - visualIndex;
+                currentShift += diff;
+                updateCarousel();
+                
+                // Restart rotation after a delay? Or keep it stopped?
+                // Let's restart after 6 seconds of inactivity
+                setTimeout(() => {
+                    stopRotation(); 
+                    startRotation();
+                }, 6000);
+            }
+        });
+    });
 }
 
 function updateLanguage(lang) {
