@@ -203,10 +203,14 @@ function initializeApp() {
 
     // --- HAMBURGER MENU LOGIC ---
     const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const hamburgerIcon = document.getElementById('hamburgerIcon');
     const navElements = document.getElementById('navElements');
     
     if (hamburgerBtn && navElements) {
-        hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.addEventListener('click', (e) => {
+            // Toggle active-menu class for X animation
+            e.preventDefault();
+            hamburgerIcon.classList.toggle('active-menu');
             navElements.classList.toggle('active');
         });
     }
@@ -233,6 +237,7 @@ function initializeApp() {
         if (currentScrollY > 50 && currentScrollY > lastScrollY) {
             navbar.classList.add('hidden');
             if(navElements) navElements.classList.remove('active');
+            if(hamburgerIcon) hamburgerIcon.classList.remove('active-menu');
         } else if (currentScrollY < 10) {
             navbar.classList.remove('hidden');
         }
@@ -281,7 +286,7 @@ function initVerticalCarousel() {
     if (panels.length === 0) return;
 
     // Configuration
-    const focusedIndex = 1; // 0-based index. 1 means the 2nd panel is focused.
+    const focusedIndex = 0; // 0-based index (e.g., 2 means the 3rd panel is focused).
     let carouselInterval;
     let currentShift = 0; // Tracks rotation
 
@@ -293,12 +298,30 @@ function initVerticalCarousel() {
             panels.forEach(p => {
                 p.style.top = '';
                 p.style.height = '';
+                p.style.zIndex = '';
                 p.classList.remove('mobile-active');
             });
+            const heroContainer = document.querySelector('.hero-container');
+            if(heroContainer) {
+                heroContainer.style.marginTop = 0;
+                heroContainer.style.paddingTop = getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+                heroContainer.style.height = '100vh';
+            }
             return;
         }
 
+        // Container Margin Adjustment for Header
+        const heroContainer = document.querySelector('.hero-container');
+        if(heroContainer) {
+            heroContainer.style.marginTop = getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+            heroContainer.style.paddingTop = '0';
+            heroContainer.style.height = 'calc(100svh - var(--header-height)';
+        }
+
         const total = panels.length;
+        const focusSize = 50;
+        // slotSize is the percent height for each non-focused panel; focused panel gets 50%
+        const slotSize = total > 1 ? (100 - focusSize) / (total - 1) : 50;
         
         panels.forEach((panel, index) => {
             // Calculate where this panel sits in the visual order
@@ -306,34 +329,38 @@ function initVerticalCarousel() {
             let visualIndex = (index + currentShift) % total;
             if (visualIndex < 0) visualIndex += total;
 
-            // Remove focus class
+            // Remove focus class by default
             panel.classList.remove('mobile-active');
 
             // Logic for Top, Height, and Focus
             if (visualIndex === focusedIndex) {
-                // Focused Panel
-                panel.style.top = '25%'; // Starts 25% down
-                panel.style.height = '50%'; // Takes up 50% space
+                // Focused Panel: sits at the start of the bottom half and occupies 50%
+                panel.style.top = (slotSize * focusedIndex) + '%';
+                panel.style.height = focusSize + '%'; // Takes up focuzSize space
                 panel.style.zIndex = 10;
                 panel.classList.add('mobile-active');
             } else if (visualIndex < focusedIndex) {
-                // Panels Above
-                panel.style.top = '0%';
-                panel.style.height = '25%';
+                // Panels Above: stack in the top half
+                panel.style.top = (slotSize * visualIndex) + '%';
+                panel.style.height = slotSize + '%';
                 panel.style.zIndex = 1;
             } else {
-                // Panels Below
-                panel.style.top = '75%';
-                panel.style.height = '25%';
+                // Panels Below: stack in the bottom half below the focused panel if any
+                panel.style.top = (focusSize + (slotSize * (visualIndex - 1))) + '%';
+                panel.style.height = slotSize + '%';
                 panel.style.zIndex = 1;
             }
+            // Adjust for header height
+            //if(panel.style.top) {
+            //    panel.style.top = 'calc(var(--header-height) + ' + panel.style.top + ')';
+            //}
         });
     }
 
     // Auto Rotate
     function startRotation() {
         carouselInterval = setInterval(() => {
-            currentShift++; 
+            currentShift--; 
             updateCarousel();
         }, 4000); // Rotate every 4 seconds
     }
@@ -372,8 +399,7 @@ function initVerticalCarousel() {
                 currentShift += diff;
                 updateCarousel();
                 
-                // Restart rotation after a delay? Or keep it stopped?
-                // Let's restart after 6 seconds of inactivity
+                // Restart rotation after a delay of inactivity
                 setTimeout(() => {
                     stopRotation(); 
                     startRotation();
