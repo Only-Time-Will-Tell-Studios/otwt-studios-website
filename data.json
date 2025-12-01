@@ -45,10 +45,10 @@
         },
         {
             "id": "integreat",
-            "title": "INTEGREAT",
+            "title": "INTEGREAT!",
             "link": "/integreat/",
-            "bg_image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-            "logo_image": "https://cdn-icons-png.flaticon.com/512/3159/3159310.png"
+            "bg_image": "/assets/integreat/integreat_screenshot.png",
+            "logo_image": "/assets/integreat/integreat_logo_v1.png"
         }
     ],
     "team_members": [
