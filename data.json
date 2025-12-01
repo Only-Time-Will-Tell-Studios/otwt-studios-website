@@ -1,7 +1,7 @@
 {
     "company": {
         "name": "Only Time Will Tell",
-        "logo_url": "assets/OTWT_transparent_Logo_V1.png",
+        "logo_url": "/assets/OTWT_transparent_Logo_V1.png",
         "email_support": "n/a",
         "email_press": "otwtstudios@gmail.com",
         "copyright_year": "2025"
@@ -14,6 +14,10 @@
             "elena": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop",
             "david": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
             "jessica": "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?q=80&w=1000&auto=format&fit=crop"
+        },
+        "icons": {
+            "favicon_dark": "/assets/OTWT_transparent_Logo_V1.png",
+            "favicon_light": "/assets/OTWT_BW_Logo_V1.png"
         }
     },
     "links": {
@@ -26,23 +30,23 @@
     },
     "games": [
         {
-            "id": "cyber",
-            "title": "CYBER REVOLT",
-            "link": "cyber-revolt.html",
+            "id": "shipyard",
+            "title": "SHIPYARD",
+            "link": "/shipyard/",
             "bg_image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
             "logo_image": "https://cdn-icons-png.flaticon.com/512/2991/2991606.png"
         },
         {
             "id": "underfjord",
             "title": "UNDERFJORD",
-            "link": "underfjord.html",
-            "bg_image": "assets/fountains_bossfight.gif",
-            "logo_image": "assets/underfjord_title.png"
+            "link": "/underfjord/",
+            "bg_image": "/assets/underfjord/fountains_bossfight.gif",
+            "logo_image": "/assets/underfjord/underfjord_title.png"
         },
         {
-            "id": "neon",
-            "title": "NEON DRIFTER",
-            "link": "neon-drifter.html",
+            "id": "integreat",
+            "title": "INTEGREAT",
+            "link": "/integreat/",
             "bg_image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
             "logo_image": "https://cdn-icons-png.flaticon.com/512/3159/3159310.png"
         }
@@ -173,7 +177,7 @@
             "btn_clear": "Cookies Löschen",
             "contact_paragraph": "Wir würden uns freuen, von Ihnen zu hören! Egal, ob Sie Fragen zu unseren Spielen haben, Unterstützung benötigen oder Presseanfragen besprechen möchten, zögern Sie nicht, uns zu kontaktieren."
         },
-        "jp": {
+        "ja": {
             "nav_home": "ホームページ",
             "nav_games": "ゲーム",
             "nav_about": "について",

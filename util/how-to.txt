@@ -1,8 +1,9 @@
 TO ADD A NEW GAME:
 
 For the homepage hero, add another <a class="game-panel"><a>.
-Then, add the game's entry into data.json
-Then, make a game.html file for it, link it to the data.json and hero accordion
+Then, add the game's entry into data.json (ensure for the game's id, it is all lowercase and snake_case)
+Then, make a folder named "game_name" for it, and under that folder make an index.html file.
+Link the root path of that folder (/game_name/) to the data.json and hero accordion
 
 
 

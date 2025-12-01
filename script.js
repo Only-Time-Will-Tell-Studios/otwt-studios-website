@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     // 1. FETCH DATA
     try {
-        const response = await fetch('data.json');
+        const response = await fetch('/data.json');
         siteData = await response.json();
         
         // Once data is loaded, initialize everything
@@ -44,7 +44,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function populateStaticContent() {
-    // 1. Header Company Info
+    // 1. Header Company Info + Mobile Header Styling
+    const header = document.getElementById('navbar');
+    if (window.innerWidth <= 768 && header) {
+        header.style.paddingInline = '4vw';
+        header.children[0].style.gap = '0.8rem';
+    } 
+    else if (header) {
+        header.style.paddingInline = '3vw';
+        header.children[0].style.gap = '1rem';
+    }
+
     const companyNameEls = document.querySelectorAll('.logo-text');
     companyNameEls.forEach(el => {
         el.innerHTML = `${siteData.company.name}`;
@@ -111,7 +121,7 @@ function populateStaticContent() {
         copyright.innerText = `© ${siteData.company.copyright_year} ${siteData.company.name}.`;
     }
 
-    // 7. Socials Links
+    // 6. Socials Links
     if (siteData.links && siteData.links.socials) {
         const discordLinks = document.querySelectorAll('a.discord_link');
         discordLinks.forEach(link => link.href = siteData.links.socials.discord);
@@ -123,17 +133,39 @@ function populateStaticContent() {
         instagramLinks.forEach(link => link.href = siteData.links.socials.instagram);
     }
     
-    // 8. Game Page Specifics
+    // 7. Game Page Specifics
     const heroBg = document.querySelector('.game-hero-bg');
     if (heroBg) {
         const path = window.location.pathname;
-        const filename = path.substring(path.lastIndexOf('/') + 1);
-        const game = siteData.games.find(g => g.link === filename);
+        let filename = path.substring(path.lastIndexOf('/') + 1);
+        // Handle case where path ends with a slash
+        if (filename === '') {
+            filename = path.substring(path.lastIndexOf('/', path.length - 2) + 1, path.length - 1);
+        }
+        // Handle case where filename includes .html, in which case purge it
+        const cleanFilename = filename.endsWith('.html') ? filename.replace(".html", "") : filename;
+        const game = siteData.games.find(g => g.id === cleanFilename);
         if (game) {
             heroBg.style.backgroundImage = `url('${game.bg_image}')`;
             const titleEl = document.querySelector('.game-title-wrapper h1');
             if(titleEl) titleEl.innerText = game.title;
         }
+    }
+
+    // 8. Change Tab Icon based on dark/light mode
+    const favicon = document.getElementById('favicon');
+    if (favicon) {
+        const darkIcon = siteData.images.icons.favicon_dark;
+        const lightIcon = siteData.images.icons.favicon_light;
+        function updateFavicon() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                favicon.href = darkIcon;
+            } else {
+                favicon.href = lightIcon;
+            }
+        }
+        updateFavicon();
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
     }
 }
 
@@ -224,6 +256,8 @@ function initializeApp() {
                 e.stopPropagation();
                 const content = dropdownTrigger.querySelector('.dropdown-content');
                 content.classList.toggle('show');
+                const dropdownIcon = dropdownTrigger.querySelector('.dropdown-icon');
+                dropdownIcon.classList.toggle('open');
             }
         });
     }
@@ -277,6 +311,16 @@ function initializeApp() {
             el.style.opacity = "1";
             el.style.transform = "none";
         });
+    }
+
+    // --- FULLSCREEN BUTTON LOGIC ---
+    // Integreat Embed
+    const integreatEmbed = document.getElementById('integreat-embed')
+    if (integreatEmbed) {
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        fullscreenBtn.addEventListener("click", (e) => {
+            enterFullscreenIFrame(integreatEmbed)
+        })
     }
 }
 
@@ -407,6 +451,18 @@ function initVerticalCarousel() {
             }
         });
     });
+}
+
+function enterFullscreenIFrame(iframe) {
+    if (iframe) {
+        if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        } else if (iframe.webkitRequestFullscreen) { /* Safari */
+            iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) { /* IE11 */
+            iframe.msRequestFullscreen();
+        }
+    }
 }
 
 function updateLanguage(lang) {

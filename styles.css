@@ -37,7 +37,6 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 
 .nav-left { display: flex; align-items: center; gap: 1rem; z-index: 1002; max-width: 70%; }
 .company-logo { width: 40px; height: 40px; filter: drop-shadow(0 0 4px var(--accent)); margin-bottom: 2px; flex-shrink: 0; }
-/* Fix: Prevent wrapping */
 .logo-text { 
     font-family: var(--font-title); font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; 
     white-space: nowrap; overflow: visible;
@@ -48,7 +47,7 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 .nav-elements { display: flex; align-items: center; width: 100%; justify-content: flex-end; }
 
 .nav-links { display: flex; gap: clamp(2vw, 2.2vmin, 3vw); align-items: center; height: 100%; }
-.nav-links > li { position: relative; height: 100%; display: flex; align-items: center; }
+.nav-links > li { position: relative; height: 100%; display: flex; align-items: center; -webkit-tap-highlight-color: transparent; }
 .nav-links a, .nav-links span {
     font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase;
     letter-spacing: 1px; position: relative; transition: color 0.3s; cursor: pointer;
@@ -61,6 +60,13 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 .nav-links > li > a:hover::after, .nav-links > li > span:hover::after { width: 100%; }
 
 /* DROPDOWN MENU */
+.dropdown-icon { position: absolute; right: 1%; top: 0%; pointer-events: none; }
+.dropdown-icon { display: flex; font-size: 1.3rem; transform: rotate(90deg); transition: all ease-out 0.1s;}
+.dropdown-icon.open { transform: rotate(0deg); transition: all ease-out 0.1s;}
+@media (min-width: 769px) {
+    .nav-links .dropdown-icon { display: none; }
+}
+.dropdown-trigger:hover .dropdown-icon { color: var(--accent); } 
 .dropdown-content {
     display: none; position: absolute; 
     top: calc(var(--header-height) - 175%); left: 50%;
@@ -72,12 +78,11 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 @media (min-width: 769px) {
     .nav-links li:hover .dropdown-content { display: block; animation: fadeInDropdown 0.2s ease ; }
 }
-.dropdown-content a { display: block; padding: 1rem; border-bottom: 1px solid #333; text-align: center; font-size: 0.85rem; }
+.dropdown-content a { display: block; padding: 1rem; border-bottom: 1px solid #333; text-align: center; font-size: 0.85rem; -webkit-tap-highlight-color: transparent;}
 .dropdown-content a:hover { background: rgba(0, 243, 255, 0.1); }
 
 /* SETTINGS */
 .nav-right { position: relative; display: flex; align-items: center; margin-inline-start: 2vw; }
-.mobile-settings-label { display: none; margin-right: 10px; font-family: var(--font-head); text-transform: uppercase; font-size: 0.9rem; }
 .settings-icon { font-size: 1.2rem; color: #fff; cursor: pointer; transition: transform 0.5s, color 0.3s; }
 .settings-icon:hover { transform: rotate(90deg); color: var(--accent); }
 .settings-popup {
@@ -220,9 +225,10 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 
 /* --- GAME PAGE SPECIFIC --- */
 .game-header { height: 60vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: var(--header-height); }
+#integreat-header.game-header { height: 40vh; }
 .game-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.5); z-index: -1; }
-.game-title-wrapper { text-align: center; width: 90%; }
-.genre-tag { border: 1px solid var(--accent); color: var(--accent); padding: 0.5rem 1rem; text-transform: uppercase; }
+.game-title-wrapper { vertical-align: middle; text-align: center; width: 90%; }
+.genre-tag { border: 1px solid var(--accent); color: var(--accent); padding: 0.5rem 1rem; text-transform: uppercase; } 
 .game-info { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: -50px; position: relative; z-index: 2; background: var(--bg-color); padding: 3rem; border-top: 2px solid var(--accent); }
 .media-placeholder { width: 100%; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; border: 1px dashed #444; }
 
@@ -255,24 +261,29 @@ footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1
     .dropdown-content { 
         position: relative; top: 0; left: 0; transform: none; width: 100%; 
         box-shadow: none; background: transparent; border: none; 
-        padding-left: 1rem; display: none; 
+        padding-left: 1rem; margin-top: 1rem; display: none; 
     }
     /* Class toggled by JS */
     .dropdown-content.show { display: block; } 
     .dropdown-content a { text-align: left; padding: 0.5rem 0; border-bottom: none; color: #aaa; }
+    .dropdown-content a:hover { background: transparent; }
 
     /* Settings in mobile menu */
     .nav-right { width: 100%; margin: 2rem 0 0 0; border-top: 1px solid #333; padding-top: 1.5rem; justify-content: flex-start; }
-    /* Hide the icon on mobile, show label */
-    .settings-icon { display: none; }
-    .mobile-settings-label { display: block; color: #fff; width: 100%; margin-bottom: 1rem; }
-    
-    .settings-popup { 
-        top: auto; bottom: 0; left: 0; right: auto; width: 100%; 
+    /* Hide the icon on mobile */
+    .nav-right .settings-icon { display: none; }
+
+    .nav-right .settings-container { width: 100%; }
+    .nav-right .settings-popup { 
+        top: auto; bottom: 0; left: 0; right: auto; width: 100%;
         position: relative; box-shadow: none; border: none; 
         background: transparent; clip-path: none; padding: 0; 
         display: flex; /* Always show inputs in mobile */
-        opacity: 1; animation: none;
+        opacity: 1; animation: none; margin-top: 0.5rem;
+    }
+    .nav-right .settings-popup h4 { 
+        font-family: var(--font-head); font-size: 1.3rem; color: var(--accent);
+        letter-spacing: 1px; position: relative; border-bottom: 0px; padding-bottom: 0rem; 
     }
 
     /* HERO ACCORDION: Vertical Carousel */
@@ -312,9 +323,16 @@ footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1
     .socials a { width: auto; margin: 5px 15px; }
 }
 
+/* --- GAME EMBED --- */
+.fullscreen-btn-container { padding-left: 2rem; padding-right: 2rem; padding-top: 2rem; padding-bottom: 2rem; }
+
+.game-embed-container {
+    position: relative; width: 80%; align-self: center; align-items: center;
+    display: flex; justify-self: center; justify-items: center; justify-content: center;
+    height: 100svh; overflow: visible; margin-bottom: 2rem;
+}
 
 /* --- IMAGE & SAFETY UTILITY --- */
-
 .pixelated {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
