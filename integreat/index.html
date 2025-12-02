@@ -14,7 +14,7 @@
 
     <nav class="navbar" id="navbar">
         <div class="nav-left">
-            <img src="" alt="Logo" class="company-logo protected-image">
+            <img src="/assets/OTWT_transparent_Logo_V1.png" alt="Logo" class="company-logo protected-image">
             <div class="logo-text">Only Time Will Tell</div>
         </div>
 
@@ -28,11 +28,11 @@
         <!-- Wrapper for Links and Settings -->
         <div class="nav-elements" id="navElements">
             <ul class="nav-links">
-                <li><a href="/" class="active" data-i18n="nav_home">Home</a></li>
+                <li><a href="/" data-i18n="nav_home">Home</a></li>
                 
                 <li class="dropdown-trigger">
-                    <span data-i18n="nav_games">Games</span>
-                    <i class="dropdown-icon fa-solid fa-chevron-down"></i>
+                    <span class="active" data-i18n="nav_games">Games</span>
+                    <i class="dropdown-icon fa-solid fa-chevron-down active"></i>
                     <div class="dropdown-content">
                         <!-- Links populated by JS -->
                     </div>
@@ -72,14 +72,33 @@
     </nav>
 
     <header class="game-header" id="integreat-header">
-        <div class="game-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop');"></div>
+        <div class="game-hero-bg" style="background-image: url('/assets/integreat/integreat_screenshot.png');"></div>
         <div class="game-title-wrapper">
             <h1>INTEGREAT!</h1>
             <span class="genre-tag">DECKBUILDER / ROGUELIKE</span>
         </div>
     </header>
 
-    <!-- Fullscreen button (below embed container) -->
+    <section class="game-info container">
+        <div class="game-description">
+            <h2>DEAL DAMAGE WITH BOUNDS</h2>
+            <p data-i18n="game_desc_integreat_1">Fight enemy functions by setting the bounds of the function's integral and evaluating. Earn coins at the end of each round to buy powerful upgrades in this procedurally generated math game inspired by Balatro!</p>  
+            <br>
+            <h3 id="scroll_down_prompt_integreat" data-i18n="game-desc_integreat_3">Scroll down to play Integreat! for free or</h3>
+            <!--- Launch Button --->
+            <a href="/integreat/play/" class="protected-button">
+                <button class="cyber-btn launch-game-btn protected-button" data-i18n="btn_fullscreen">
+                    <span data-i18n="btn_launch_standalone">Launch Standalone Game</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+            </a>
+        </div>
+        <div class="game-media">
+            <div class="media-placeholder">YOUTUBE TRAILER</div>
+        </div>
+    </section>
+
+    <!-- Fullscreen button -->
     <div class="fullscreen-btn-container" style="text-align: center;">
         <div class="container">
             <button id="fullscreenBtn" class="cyber-btn protected-button" data-i18n="btn_fullscreen">Go Fullscreen</button>
@@ -88,7 +107,7 @@
 
     <!-- Integreat Embed Container -->
     <div class="game-embed-container">  
-        <iframe id="integreat-embed" src="integreat.html" width="100%" height="100%" frameborder="0%" allow="fullscreen"></iframe>
+        <iframe id="integreat-embed" src="play/index.html" width="100%" height="100%" frameborder="0%" allow="fullscreen"></iframe>
     </div>
 
     <footer id="contact">

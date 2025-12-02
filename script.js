@@ -150,6 +150,11 @@ function populateStaticContent() {
             const titleEl = document.querySelector('.game-title-wrapper h1');
             if(titleEl) titleEl.innerText = game.title;
         }
+        // Highlight this game's navbar link
+        const dropdownContent = document.querySelector(".dropdown-content");
+        const childrenArray =  Array.from(dropdownContent.children);
+        const dropdownItem = childrenArray.find(g => g.innerText === game.title);
+        dropdownItem.classList.toggle('active');
     }
 
     // 8. Change Tab Icon based on dark/light mode

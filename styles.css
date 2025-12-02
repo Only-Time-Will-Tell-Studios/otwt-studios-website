@@ -52,7 +52,7 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
     font-family: var(--font-head); font-size: 0.9rem; text-transform: uppercase;
     letter-spacing: 1px; position: relative; transition: color 0.3s; cursor: pointer;
 }
-.nav-links a:hover, .nav-links a.active, .nav-links span:hover { color: var(--accent); }
+.nav-links a:hover, .nav-links a.active, .nav-links span:hover, .nav-links span.active { color: var(--accent); }
 .nav-links > li > a::after, .nav-links > li > span::after {
     content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
     background: var(--accent); transition: width 0.3s ease;
@@ -60,7 +60,8 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 .nav-links > li > a:hover::after, .nav-links > li > span:hover::after { width: 100%; }
 
 /* DROPDOWN MENU */
-.dropdown-icon { position: absolute; right: 1%; top: 0%; pointer-events: none; }
+.dropdown-icon { position: absolute; right: 1%; top: 0%; pointer-events: none; } 
+.dropdown-icon.active { color: var(--accent); }
 .dropdown-icon { display: flex; font-size: 1.3rem; transform: rotate(90deg); transition: all ease-out 0.1s;}
 .dropdown-icon.open { transform: rotate(0deg); transition: all ease-out 0.1s;}
 @media (min-width: 769px) {
@@ -73,6 +74,9 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
     transform: translateX(-50%); background: #1a1a1a; min-width: 200px;
     border: 1px solid var(--accent); border-top: none;
     box-shadow: 0 10px 20px rgba(0,0,0,0.8); z-index: 1001;
+}
+.dropdown-content a.active {
+    color: var(--accent);
 }
 /* Desktop Hover Logic */
 @media (min-width: 769px) {
@@ -225,12 +229,15 @@ body.no-anim .panel-content, body.no-anim .game-logo { transition: all 0.4s ease
 
 /* --- GAME PAGE SPECIFIC --- */
 .game-header { height: 60vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: var(--header-height); }
-#integreat-header.game-header { height: 40vh; }
+#integreat-header.game-header { height: 50vh; }
 .game-hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.5); z-index: -1; }
 .game-title-wrapper { vertical-align: middle; text-align: center; width: 90%; }
 .genre-tag { border: 1px solid var(--accent); color: var(--accent); padding: 0.5rem 1rem; text-transform: uppercase; } 
 .game-info { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: -50px; position: relative; z-index: 2; background: var(--bg-color); padding: 3rem; border-top: 2px solid var(--accent); }
 .media-placeholder { width: 100%; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; border: 1px dashed #444; }
+.launch-game-btn { display: flex; gap: 0.75rem; }
+.launch-game-btn i { align-self: center;}
+.launch-game-btn span, .launch-game-btn i { font-size: clamp(0.85em, 1vw, 1em); }
 
 /* --- FOOTER --- */
 footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1px solid #333; }
@@ -324,7 +331,7 @@ footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1
 }
 
 /* --- GAME EMBED --- */
-.fullscreen-btn-container { padding-left: 2rem; padding-right: 2rem; padding-top: 2rem; padding-bottom: 2rem; }
+.fullscreen-btn-container { padding-left: 2rem; padding-right: 2rem; padding-top: 4rem; padding-bottom: 2rem; }
 
 .game-embed-container {
     position: relative; width: 80%; align-self: center; align-items: center;
@@ -362,3 +369,6 @@ footer { background: #000; padding: 4rem 2rem; text-align: center; border-top: 1
     -ms-user-drag: none;
     -webkit-tap-highlight-color: transparent;
 }
+
+/* --- SPECIFIC ELEMENTS --- */
+#scroll_down_prompt_integreat { font-size: clamp(1.05em, 2vw, 1.17em); margin-bottom: 0.5rem; }
