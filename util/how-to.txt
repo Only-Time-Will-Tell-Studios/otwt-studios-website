@@ -13,3 +13,16 @@ In every .html page, add the new language's entry into the nav.settings.lang-sel
 Use the language's ISO 639-1 two-character ID as the <option>'s value. (ex. en, fr, de, jp, etc.)
 Then, add that language and all of its translations into data.json. Ensure you use the same
 2 character ID and all the same content keys as the other translations.
+
+
+
+ADDING ARROWS:
+
+<svg width="400" height="200" style="position: absolute;">
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refx="0" refy="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="blue" />
+        </marker>
+    </defs>
+    <line x1="50" y1="50" x2="200" y2="150" stroke="blue" stroke-width="2" marker-end="url(#arrowhead)" />
+</svg>
